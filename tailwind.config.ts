@@ -8,10 +8,16 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      colors: {
+        primary: "#1DA1F2", // 글로벌 메인 색상 설정 (예: 트위터 파란색)
+        secondary: "#14171A", // 서브 색상
+        accent: "#FFAD1F", // 강조 색상
+        background: "#F5F8FA", // 배경색
+        darkBackground: "#15202B", // 다크 모드 배경색
+        darkPrimary: "#1DA1F2", // 다크 모드 메인 색상
+      },
+      fontFamily: {
+        sans: ["Pretendard", "sans-serif"], // Tailwind의 기본 sans 폰트를 Pretendard로 교체
       },
     },
   },
