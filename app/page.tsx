@@ -4,6 +4,9 @@ export default function Home() {
       <a href="/editor" className="font-sans">
         move to editor
       </a>
+      <a href="./home" className="font-sans">
+        move to home
+      </a>
       <p className="text-primary font-sans">hihihi</p>
     </main>
   );
