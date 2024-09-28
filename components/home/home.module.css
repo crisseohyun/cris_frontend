@@ -1,0 +1,157 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .container {
+    @apply max-w-7xl mx-auto px-4;
+  }
+
+  .main-content {
+    @apply py-5;
+  }
+
+  .section-title {
+    @apply text-2xl font-bold mb-5;
+  }
+
+  .header {
+    @apply bg-background dark:bg-darkBackground py-4;
+  }
+
+  .header-content {
+    @apply flex justify-between items-center;
+  }
+
+  .menu-icon, .settings-icon {
+    @apply text-2xl cursor-pointer text-secondary dark:text-white;
+  }
+
+  .church-name {
+    @apply text-2xl font-bold text-primary dark:text-darkPrimary;
+  }
+
+  .banner {
+    @apply bg-primary text-white py-10 px-5 text-center mb-8;
+  }
+
+  .banner-text {
+    @apply text-3xl font-bold mb-2;
+  }
+
+  .banner-subtext {
+    @apply text-lg;
+  }
+
+  .info-section {
+    @apply bg-background dark:bg-darkBackground py-8 mb-8;
+  }
+
+  .worship-info {
+    @apply flex justify-around flex-wrap;
+  }
+
+  .worship-time {
+    @apply text-center m-2;
+  }
+
+  .map-section {
+    @apply mb-8;
+  }
+
+  .map-container {
+    @apply h-72 bg-gray-200 dark:bg-gray-700 flex justify-center items-center mb-4;
+  }
+
+  .placeholder-map {
+    @apply text-lg text-gray-500 dark:text-gray-400;
+  }
+
+  .address {
+    @apply text-center italic;
+  }
+
+  .gallery-section {
+    @apply mb-8;
+  }
+
+  .gallery-container {
+    @apply relative;
+  }
+
+  .gallery-image {
+    @apply w-full h-auto rounded-lg;
+  }
+
+  .gallery-navigation {
+    @apply absolute top-1/2 left-0 right-0 flex justify-between transform -translate-y-1/2;
+  }
+
+  .nav-icon {
+    @apply text-3xl text-white bg-black bg-opacity-50 rounded-full p-2 cursor-pointer;
+  }
+
+  .image-caption {
+    @apply text-center mt-2 italic;
+  }
+
+  .announcement-section {
+    @apply mb-8;
+  }
+
+  .statistics-section {
+    @apply mb-8;
+  }
+
+  .chart-container {
+    @apply h-72 mb-4;
+  }
+
+  .chart-caption {
+    @apply text-center italic;
+  }
+
+  .footer {
+    @apply bg-background dark:bg-darkBackground py-5 text-center mt-8;
+  }
+
+  .group-navigation {
+    @apply flex items-center overflow-x-auto py-2;
+  }
+
+  .group-link {
+    @apply flex flex-col items-center mx-2 no-underline text-secondary dark:text-white;
+  }
+
+  .group-image {
+    @apply rounded-full object-cover;
+  }
+
+  .group-name {
+    @apply text-xs mt-1;
+  }
+
+  .nav-arrow {
+    @apply bg-transparent border-none text-xl cursor-pointer text-secondary dark:text-white;
+  }
+
+  .add-group-button, .add-profile-button {
+    @apply w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-700 border-none text-2xl cursor-pointer flex items-center justify-center text-secondary dark:text-white;
+  }
+
+  .profile-navigation {
+    @apply flex items-center overflow-x-auto py-2;
+  }
+
+  .profile {
+    @apply flex flex-col items-center mx-2;
+  }
+
+  .profile-image {
+    @apply rounded-full object-cover;
+  }
+
+  .profile-name {
+    @apply text-xs mt-1 text-secondary dark:text-white;
+  }
+}

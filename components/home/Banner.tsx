@@ -1,5 +1,4 @@
 import React from 'react';
-import styles from './home.css';
 
 interface BannerProps {
   year: string;
@@ -8,11 +7,11 @@ interface BannerProps {
 }
 
 const Banner: React.FC<BannerProps> = ({ year, message, verse }) => (
-  <section className={styles.banner}>
-    <span className={styles.bannerYear}>{year} 표어</span>
-    <h2 className={styles.bannerMessage}>{message}</h2>
-    <span className={styles.bannerVerse}>{verse}</span>
-  </section>
+  <div className="bg-green-700 text-white p-6 rounded-lg">
+    <div className="text-sm mb-2">{year} 표어</div>
+    <h2 className="text-2xl font-bold mb-2 text-yellow-300">{message}</h2>
+    <div className="text-right text-sm">{verse}</div>
+  </div>
 );
 
 export default Banner;

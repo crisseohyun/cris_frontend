@@ -1,43 +1,47 @@
 import React from 'react';
-import { IconType } from 'react-icons';
-import styles from './home.css';
+import Image from 'next/image';
+import { FiCalendar, FiClock, FiMapPin, FiSun } from 'react-icons/fi';
 
 interface WorshipInfoProps {
-  CalendarIcon: IconType;
-  ClockIcon: IconType;
-  LocationIcon: IconType;
-  SunIcon: IconType;
+  pastorName: string;
+  pastorImageUrl: string;
   mainWorshipTime: string;
-  otherWorshipTimes: string[];
+  wednesdayWorshipTime: string;
 }
 
 const WorshipInfo: React.FC<WorshipInfoProps> = ({
-  CalendarIcon, ClockIcon, LocationIcon, SunIcon,
-  mainWorshipTime, otherWorshipTimes
+  pastorName,
+  pastorImageUrl,
+  mainWorshipTime,
+  wednesdayWorshipTime,
 }) => (
-  <section className={styles.worshipInfo}>
-    <div className={styles.mainWorshipTime}>
-      <CalendarIcon className={styles.icon} />
-      <span>주일예배</span>
-      <ClockIcon className={styles.icon} />
-      <span>{mainWorshipTime}</span>
+  <div className="bg-white rounded-lg shadow p-6">
+    <div className="flex items-center mb-4">
+      <Image src={pastorImageUrl} alt={pastorName} width={60} height={60} className="rounded-full mr-4" />
+      <div>
+        <h3 className="font-semibold">{pastorName}</h3>
+        <p className="text-sm text-gray-500">담임목사</p>
+      </div>
     </div>
-    <div className={styles.otherWorshipTimes}>
-      {otherWorshipTimes.map((time, index) => (
-        <div key={index} className={styles.worshipTime}>
-          <span>{time}</span>
-        </div>
-      ))}
+    <div className="grid grid-cols-2 gap-4">
+      <div>
+        <p className="flex items-center text-sm mb-1"><FiCalendar className="mr-2" /> 주일예배</p>
+        <p className="text-sm">{mainWorshipTime}</p>
+      </div>
+      <div>
+        <p className="flex items-center text-sm mb-1"><FiClock className="mr-2" /> 수요예배</p>
+        <p className="text-sm">{wednesdayWorshipTime}</p>
+      </div>
+      <div>
+        <p className="flex items-center text-sm mb-1"><FiMapPin className="mr-2" /> 오시는 길</p>
+        <p className="text-sm text-blue-500">지도 보기</p>
+      </div>
+      <div>
+        <p className="flex items-center text-sm mb-1"><FiSun className="mr-2" /> 새벽기도회</p>
+        <p className="text-sm">오전 05:30</p>
+      </div>
     </div>
-    <div className={styles.locationInfo}>
-      <LocationIcon className={styles.icon} />
-      <span>오시는 길</span>
-    </div>
-    <div className={styles.weatherInfo}>
-      <SunIcon className={styles.icon} />
-      <span>날씨정보</span>
-    </div>
-  </section>
+  </div>
 );
 
 export default WorshipInfo;

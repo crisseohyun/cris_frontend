@@ -1,7 +1,5 @@
 import React from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
-import styles from './home.css';
 
 interface GroupProps {
   id: string;
@@ -9,22 +7,25 @@ interface GroupProps {
   imageUrl: string;
 }
 
-interface GroupNavigationProps {
-  groups: GroupProps[];
-}
-
-const GroupNavigation: React.FC<GroupNavigationProps> = ({ groups }) => (
-  <nav className={styles.groupNavigation}>
-    <button className={styles.navArrow}>←</button>
+const GroupNavigation: React.FC<{ groups: GroupProps[] }> = ({ groups }) => (
+  <div className="flex overflow-x-auto space-x-4 py-4 px-4 bg-white">
     {groups.map((group) => (
-      <Link href={`/group/${group.id}`} key={group.id} className={styles.groupLink}>
-        <Image src={group.imageUrl} alt={group.name} width={40} height={40} className={styles.groupImage} />
-        <span className={styles.groupName}>{group.name}</span>
-      </Link>
+      <div key={group.id} className="flex-shrink-0 text-center">
+        <div className="w-20 h-20 bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 rounded-full mx-auto mb-2 p-0.5">
+          <div className="w-full h-full bg-white rounded-full flex items-center justify-center">
+            <Image src={group.imageUrl} alt={group.name} width={70} height={70} className="rounded-full" />
+          </div>
+        </div>
+        <p className="text-xs">{group.name}</p>
+      </div>
     ))}
-    <button className={styles.navArrow}>→</button>
-    <button className={styles.addGroupButton}>+</button>
-  </nav>
+    <div className="flex-shrink-0">
+      <div className="w-20 h-20 bg-gray-200 rounded-full flex items-center justify-center mb-2">
+        <span className="text-3xl text-gray-400">+</span>
+      </div>
+      <p className="text-xs">추가</p>
+    </div>
+  </div>
 );
 
 export default GroupNavigation;
