@@ -1,29 +1,47 @@
 import React from 'react';
 import Image from 'next/image';
+import { GoArrowRight, GoArrowLeft } from "react-icons/go"; // react-icons에서 화살표 아이콘을 임포트
 
 interface GroupProps {
   id: string;
   name: string;
   imageUrl: string;
+  role?: string;
 }
 
 const GroupNavigation: React.FC<{ groups: GroupProps[] }> = ({ groups }) => (
-  <div className="flex overflow-x-auto space-x-4 py-4 px-4 bg-white">
-    {groups.map((group) => (
-      <div key={group.id} className="flex-shrink-0 text-center">
-        <div className="w-20 h-20 bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 rounded-full mx-auto mb-2 p-0.5">
-          <div className="w-full h-full bg-white rounded-full flex items-center justify-center">
-            <Image src={group.imageUrl} alt={group.name} width={70} height={70} className="rounded-full" />
+  <div className="relative my-8">
+    {/* 왼쪽 화살표 아이콘 */}
+    <div className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10">
+      <GoArrowLeft size={24} /> 
+    </div>
+    
+    {/* 소그룹 목록을 가로로 나열 */}
+    <div className="flex justify-center space-x-6 py-4 px-12 overflow-x-auto">
+      {groups.map((group) => (
+        <div key={group.id} className="flex-shrink-0 text-center w-28">
+          {/* 소그룹 이미지를 동그라미로 표시 */}
+          <div className="w-24 h-24 bg-green-100 rounded-full mx-auto mb-2 flex items-center justify-center">
+            <Image 
+              src={group.imageUrl} 
+              alt={group.name} 
+              width={60} 
+              height={60} 
+              className="rounded-full"
+              unoptimized
+            />
           </div>
+          {/* 소그룹 이름 */}
+          <p className="text-sm font-semibold">{group.name}</p>
+          {/* 소그룹 역할 (있을 경우만 표시) */}
+          {group.role && <p className="text-xs text-gray-500">{group.role}</p>}
         </div>
-        <p className="text-xs">{group.name}</p>
-      </div>
-    ))}
-    <div className="flex-shrink-0">
-      <div className="w-20 h-20 bg-gray-200 rounded-full flex items-center justify-center mb-2">
-        <span className="text-3xl text-gray-400">+</span>
-      </div>
-      <p className="text-xs">추가</p>
+      ))}
+    </div>
+    
+    {/* 오른쪽 화살표 아이콘 */}
+    <div className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10">
+      <GoArrowRight size={24} /> 
     </div>
   </div>
 );
