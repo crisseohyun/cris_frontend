@@ -1,26 +1,25 @@
+'use client';
+
 import React from 'react';
-import { Card, Text, Container } from '@nextui-org/react';
+import { Card, CardBody } from '@nextui-org/react';
 
 interface BannerProps {
   year: string;
   message: string;
   verse: string;
+  className?: string;
 }
 
-const Banner: React.FC<BannerProps> = ({ year, message, verse }) => (
-  <Container>
-    <Card css={{ 
-      background: '$gradient',
-      padding: '$10',
-      textAlign: 'center'
-    }}>
-      <Card.Body>
-        <Text h2 color="white">{year}</Text>
-        <Text h3 color="white" css={{ marginTop: '$5' }}>{message}</Text>
-        <Text color="white" css={{ marginTop: '$3', fontStyle: 'italic' }}>{verse}</Text>
-      </Card.Body>
-    </Card>
-  </Container>
+const Banner: React.FC<BannerProps> = ({ year, message, verse, className }) => (
+  <Card
+    className={`bg-gradient-to-r from-blue-500 to-purple-500 text-center rounded-tl-[30px] ${className}`}
+  >
+    <CardBody className="flex flex-col justify-center items-center h-full gap-0">
+      <h2 className="text-2xl text-white">{year}</h2>
+      <h3 className="text-xl text-white mt-2">{message}</h3>
+      <p className="text-white mt-2 italic">{verse}</p>
+    </CardBody>
+  </Card>
 );
 
 export default Banner;

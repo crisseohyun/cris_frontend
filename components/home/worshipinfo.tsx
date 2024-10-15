@@ -1,77 +1,122 @@
+'use client';
+
 import React from 'react';
-import { Card, Avatar, Text, Grid, Spacer } from '@nextui-org/react';
+import { Card, CardBody } from '@nextui-org/react';
 import { FiCalendar, FiClock, FiSun, FiMapPin } from 'react-icons/fi';
-
-interface PastorInfoProps {
-  pastorName: string;
-  pastorRole: string;
-  pastorImageUrl: string;
-}
-
-const PastorInfo: React.FC<PastorInfoProps> = ({ pastorName, pastorRole, pastorImageUrl }) => (
-  <Card css={{ bg: '$blue50', p: '$6', alignItems: 'center', textAlign: 'center' }}>
-    <Avatar
-      src={pastorImageUrl}
-      css={{ size: '$32' }}
-      bordered
-      color="primary"
-    />
-    <Spacer y={1} />
-    <Text h3 size="$xl">{pastorName}</Text>
-    <Text color="$accents7">{pastorRole}</Text>
-  </Card>
-);
 
 interface WorshipTimesProps {
   mainWorshipTimes: { day: string; time: string }[];
   wednesdayWorshipTime: string;
   fridayWorshipTime: string;
   dawnWorshipTimes: { weekday: string; weekend: string };
+  className?: string;
 }
 
-const WorshipTimes: React.FC<WorshipTimesProps> = ({ mainWorshipTimes, wednesdayWorshipTime, fridayWorshipTime, dawnWorshipTimes }) => (
-  <Card css={{ p: '$6' }}>
-    <Grid.Container gap={2}>
-      <Grid xs={12}>
-        <Text h4 css={{ d: 'flex', ai: 'center' }}><FiCalendar /><Spacer x={0.5} />주일예배</Text>
-      </Grid>
-      {mainWorshipTimes.map((worship, index) => (
-        <Grid xs={12} key={index}>
-          <Text size="$sm">{`${worship.day}: ${worship.time}`}</Text>
-        </Grid>
-      ))}
-      <Grid xs={12}>
-        <Text h4 css={{ d: 'flex', ai: 'center' }}><FiClock /><Spacer x={0.5} />수요예배</Text>
-      </Grid>
-      <Grid xs={12}>
-        <Text size="$sm">{wednesdayWorshipTime}</Text>
-      </Grid>
-      <Grid xs={12}>
-        <Text h4 css={{ d: 'flex', ai: 'center' }}><FiClock /><Spacer x={0.5} />금요예배</Text>
-      </Grid>
-      <Grid xs={12}>
-        <Text size="$sm">{fridayWorshipTime}</Text>
-      </Grid>
-      <Grid xs={12}>
-        <Text h4 css={{ d: 'flex', ai: 'center' }}><FiSun /><Spacer x={0.5} />새벽기도회</Text>
-      </Grid>
-      <Grid xs={12}>
-        <Text size="$sm">평일 {dawnWorshipTimes.weekday}</Text>
-        <Text size="$sm">주말 {dawnWorshipTimes.weekend}</Text>
-      </Grid>
-    </Grid.Container>
+export const WorshipTimes: React.FC<WorshipTimesProps> = ({
+  mainWorshipTimes,
+  wednesdayWorshipTime,
+  fridayWorshipTime,
+  dawnWorshipTimes,
+  className,
+}) => (
+  <Card className={`p-6 w-[384px] h-[214px] ${className}`}>
+    <CardBody>
+      <div className="space-y-4">
+        <div>
+          <h4 className="flex items-center text-lg font-semibold">
+            <FiCalendar className="mr-2" />
+            주일예배
+          </h4>
+          <ul className="mt-2 space-y-1">
+            {mainWorshipTimes.map((worship, index) => (
+              <li key={index} className="text-sm">
+                {`${worship.day}: ${worship.time}`}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <h4 className="flex items-center text-lg font-semibold">
+            <FiClock className="mr-2" />
+            수요예배
+          </h4>
+          <p className="text-sm mt-1">{wednesdayWorshipTime}</p>
+        </div>
+        <div>
+          <h4 className="flex items-center text-lg font-semibold">
+            <FiClock className="mr-2" />
+            금요예배
+          </h4>
+          <p className="text-sm mt-1">{fridayWorshipTime}</p>
+        </div>
+        <div>
+          <h4 className="flex items-center text-lg font-semibold">
+            <FiSun className="mr-2" />
+            새벽기도회
+          </h4>
+          <p className="text-sm mt-1">평일 {dawnWorshipTimes.weekday}</p>
+          <p className="text-sm">주말 {dawnWorshipTimes.weekend}</p>
+        </div>
+      </div>
+    </CardBody>
+  </Card>
+);
+
+interface PastorInfoProps {
+  pastorName: string;
+  pastorRole: string;
+  pastorImageUrl: string;
+  className?: string;
+}
+
+export const PastorInfo: React.FC<PastorInfoProps> = ({
+  pastorName,
+  pastorRole,
+  pastorImageUrl,
+  className,
+}) => (
+  <Card className={`bg-blue-50 p-6 text-center w-[180px] h-[214px] ${className}`}>
+    <CardBody className="flex flex-col justify-center items-center h-full">
+      {pastorImageUrl ? (
+        <img
+          src={pastorImageUrl}
+          alt={`${pastorName} 프로필`}
+          className="w-32 h-32 mx-auto rounded-full object-cover"
+        />
+      ) : (
+        <div className="w-32 h-32 mx-auto bg-gray-200 rounded-full flex items-center justify-center">
+          <span className="text-gray-500">사진 없음</span>
+        </div>
+      )}
+      <h3 className="text-xl font-semibold mt-4">{pastorName}</h3>
+      <p className="text-gray-500">{pastorRole}</p>
+    </CardBody>
   </Card>
 );
 
 interface OtherInfoProps {
   locationUrl: string;
+  className?: string;
 }
 
-const OtherInfo: React.FC<OtherInfoProps> = ({ locationUrl }) => (
-  <Card css={{ p: '$6' }}>
-    <Text h4 css={{ d: 'flex', ai: 'center' }}><FiMapPin /><Spacer x={0.5} />찾아오시는 길</Text>
-    {/* 여기에 지도나 주소 정보를 추가할 수 있습니다 */}
+export const OtherInfo: React.FC<OtherInfoProps> = ({ locationUrl, className }) => (
+  <Card className={`p-6 w-[384px] h-[214px] border-t border-gray-300 ${className}`}>
+    <CardBody>
+      <h4 className="flex items-center text-lg font-semibold">
+        <FiMapPin className="mr-2" />
+        찾아오시는 길
+      </h4>
+      <div className="mt-4">
+        {locationUrl ? (
+          // 실제 지도 사용을 원하시면 아래 iframe을 사용하세요.
+          // <iframe src={locationUrl} className="w-full h-48" allowFullScreen></iframe>
+          <img src={locationUrl} alt="Map" className="w-full h-auto" />
+        ) : (
+          <div className="w-full h-48 bg-gray-200 flex items-center justify-center">
+            <span className="text-gray-500">지도 없음</span>
+          </div>
+        )}
+      </div>
+    </CardBody>
   </Card>
 );
-
-export { PastorInfo, WorshipTimes, OtherInfo };
