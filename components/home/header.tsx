@@ -11,7 +11,7 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ churchName, denomination }) => (
   <Navbar className="w-full px-4 py-4">
-    {/* 좌측: 메뉴 및 설정 버튼 */}
+    {/* 좌측: 메뉴하고 설정 버튼입니 */}
     <div className="flex items-center space-x-2">
       <Button isIconOnly variant="light" className="text-inherit">
         <FiMenu size={24} />
@@ -21,7 +21,7 @@ const Header: React.FC<HeaderProps> = ({ churchName, denomination }) => (
       </Button>
     </div>
 
-    {/* 중앙: 교회 이름과 소속 (한 줄) */}
+    {/* 교회 이름하고 소속, 아직 로고는 못 넣었음 */}
     <div className="flex items-center">
       <h1 className="font-pretendard text-[24px] md:text-[48px] font-bold leading-[1.2] text-left whitespace-nowrap">
         {churchName}
@@ -31,7 +31,7 @@ const Header: React.FC<HeaderProps> = ({ churchName, denomination }) => (
       </span>
     </div>
 
-    {/* 우측: 정수연 버튼 */}
+    {/* 회원 정보 버튼인데 아직 아이콘은 못 넣음 */}
     <div className="flex items-center">
       <Button
         variant="flat"
