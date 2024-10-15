@@ -36,10 +36,10 @@ const ChurchHome: React.FC = () => {
         year="2024"
         message="소망은 주께 있나이다"
         verse="시 39:7"
-        className="w-[996px] h-[214px] mt-16 rounded-tl-[30px]"
+        className="w-[996px] h-[214px] mt-[97px] rounded-tl-[30px]"
       />
 
-      {/* 목사님 프로필, 예배 정보, 찾아오시는 길 */}
+      {/* 목사님 프로필(아직 프로필 동그라미 구현 x), 예배 정보(칸막이? 구현 x), 찾아오시는 길 */}
       <div className="flex flex-col md:flex-row md:space-x-8 space-y-8 md:space-y-0 mt-8 w-full max-w-[996px] px-4">
         <PastorInfo
           pastorName="이상화 목사님"
@@ -75,7 +75,7 @@ const ChurchHome: React.FC = () => {
         />
       </div>
 
-      {/* 예배 갤러리 */}
+      {/* 예배 갤러리(아직 픽셀 맞추지 않음)*/}
       <div className="w-full max-w-[996px] px-4 mt-16">
         <Gallery
           images={galleryImages}

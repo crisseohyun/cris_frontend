@@ -108,8 +108,6 @@ export const OtherInfo: React.FC<OtherInfoProps> = ({ locationUrl, className }) 
       </h4>
       <div className="mt-4">
         {locationUrl ? (
-          // 실제 지도 사용을 원하시면 아래 iframe을 사용하세요.
-          // <iframe src={locationUrl} className="w-full h-48" allowFullScreen></iframe>
           <img src={locationUrl} alt="Map" className="w-full h-auto" />
         ) : (
           <div className="w-full h-48 bg-gray-200 flex items-center justify-center">
