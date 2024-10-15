@@ -1,4 +1,5 @@
 import React from 'react';
+import { Card, Text, Container } from '@nextui-org/react';
 
 interface BannerProps {
   year: string;
@@ -7,22 +8,19 @@ interface BannerProps {
 }
 
 const Banner: React.FC<BannerProps> = ({ year, message, verse }) => (
-  <div className="relative bg-gradient-to-r from-green-800 to-green-600 text-white rounded-2xl w-full h-72 p-6">
-    {/* 교회 표어*/}
-    <div className="absolute top-4 left-6 text-sm">{year} 표어</div>
-
-    {/* 배너 메시지(교회 표어) */}
-    <h2 className="text-5xl font-bold text-center mx-auto">
-      {message.split(' ').map((word, index) => (
-        <span key={index} className={index % 2 === 0 ? "text-yellow-400 drop-shadow-md" : "text-white"}>
-          {word}{' '}
-        </span>
-      ))}
-    </h2>
-
-    {/* 오른쪽*/}
-    <div className="absolute bottom-4 right-6 text-sm">{verse}</div>
-  </div>
+  <Container>
+    <Card css={{ 
+      background: '$gradient',
+      padding: '$10',
+      textAlign: 'center'
+    }}>
+      <Card.Body>
+        <Text h2 color="white">{year}</Text>
+        <Text h3 color="white" css={{ marginTop: '$5' }}>{message}</Text>
+        <Text color="white" css={{ marginTop: '$3', fontStyle: 'italic' }}>{verse}</Text>
+      </Card.Body>
+    </Card>
+  </Container>
 );
 
 export default Banner;

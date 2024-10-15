@@ -1,6 +1,6 @@
 import React from 'react';
-import Image from 'next/image';
-import { GoArrowRight, GoArrowLeft } from "react-icons/go"; // react-icons에서 화살표 아이콘 임포트
+import { Card, Button, Text, Grid, Container } from '@nextui-org/react';
+import { GoArrowRight, GoArrowLeft } from "react-icons/go";
 
 interface GalleryImage {
   src: string;
@@ -14,37 +14,77 @@ interface GalleryProps {
 }
 
 const Gallery: React.FC<GalleryProps> = ({ images }) => (
-  <div className="relative">
-    {/* 왼쪽 화살표 아이콘 */}
-    <div className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10">
-      <GoArrowLeft size={24} /> {/* GoArrowLeft 아이콘 */}
-    </div>
+  <Container css={{ position: 'relative', overflow: 'hidden' }}>
+    <Button 
+      light
+      auto
+      icon={<GoArrowLeft size={24} />}
+      css={{ 
+        position: 'absolute', 
+        left: '$4', 
+        top: '50%', 
+        transform: 'translateY(-50%)', 
+        zIndex: 10,
+        bg: '$background',
+        opacity: 0.7,
+        '&:hover': { opacity: 1 }
+      }}
+    />
     
-    <div className="flex justify-between space-x-4 overflow-x-auto px-4">
+    <Grid.Container gap={2} wrap="nowrap" css={{ overflowX: 'auto', py: '$8', px: '$12' }}>
       {images.map((image, index) => (
-        <div key={index} className="flex-shrink-0 w-80 relative">
-          <Image 
-            src={image.src} 
-            alt={image.alt} 
-            width={320} 
-            height={180} 
-            className="rounded-lg"
-            unoptimized
-          />
-          <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-2 rounded-b-lg">
-            <p className="text-sm font-semibold">{image.week}</p>
-            <p className="text-xs">{image.time}</p>
-          </div>
-          <button className="absolute bottom-2 right-2 bg-blue-500 text-white text-xs px-2 py-1 rounded">더보기</button>
-        </div>
+        <Grid key={index} css={{ minWidth: '320px' }}>
+          <Card>
+            <Card.Image
+              src={image.src}
+              alt={image.alt}
+              objectFit="cover"
+              width="100%"
+              height={180}
+            />
+            <Card.Footer
+              isBlurred
+              css={{
+                position: "absolute",
+                bgBlur: "#000a",
+                borderTop: "$borderWeights$light solid $gray800",
+                bottom: 0,
+                zIndex: 1,
+              }}
+            >
+              <Grid.Container>
+                <Grid xs={12}>
+                  <Text color="white" size="$lg" weight="bold">{image.week}</Text>
+                </Grid>
+                <Grid xs={12}>
+                  <Text color="white" size="$sm">{image.time}</Text>
+                </Grid>
+              </Grid.Container>
+            </Card.Footer>
+            <Card.Footer css={{ position: 'absolute', bottom: 0, right: 0, zIndex: 2 }}>
+              <Button size="sm" color="primary">더보기</Button>
+            </Card.Footer>
+          </Card>
+        </Grid>
       ))}
-    </div>
+    </Grid.Container>
     
-    {/* 오른쪽 화살표 아이콘 */}
-    <div className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10">
-      <GoArrowRight size={24} /> {/* GoArrowRight 아이콘 */}
-    </div>
-  </div>
+    <Button 
+      light
+      auto
+      icon={<GoArrowRight size={24} />}
+      css={{ 
+        position: 'absolute', 
+        right: '$4', 
+        top: '50%', 
+        transform: 'translateY(-50%)', 
+        zIndex: 10,
+        bg: '$background',
+        opacity: 0.7,
+        '&:hover': { opacity: 1 }
+      }}
+    />
+  </Container>
 );
 
 export default Gallery;

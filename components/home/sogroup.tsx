@@ -1,6 +1,6 @@
 import React from 'react';
-import Image from 'next/image';
-import { GoArrowRight, GoArrowLeft } from "react-icons/go"; // react-icons에서 화살표 아이콘을 임포트
+import { Card, Avatar, Text, Grid, Button } from '@nextui-org/react';
+import { GoArrowRight, GoArrowLeft } from "react-icons/go";
 
 interface GroupProps {
   id: string;
@@ -10,40 +10,36 @@ interface GroupProps {
 }
 
 const GroupNavigation: React.FC<{ groups: GroupProps[] }> = ({ groups }) => (
-  <div className="relative my-8">
-    {/* 왼쪽 화살표 아이콘 */}
-    <div className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10">
-      <GoArrowLeft size={24} /> 
-    </div>
+  <Card variant="flat" css={{ py: '$8', px: '$8', position: 'relative' }}>
+    <Button 
+      light 
+      auto 
+      icon={<GoArrowLeft size={32} />} 
+      css={{ position: 'absolute', left: '$4', top: '50%', transform: 'translateY(-50%)', zIndex: 1 }}
+    />
     
-    {/* 소그룹 목록을 가로로 나열 */}
-    <div className="flex justify-center space-x-6 py-4 px-12 overflow-x-auto">
+    <Grid.Container gap={2} justify="center" wrap="nowrap" css={{ overflowX: 'auto' }}>
       {groups.map((group) => (
-        <div key={group.id} className="flex-shrink-0 text-center w-28">
-          {/* 소그룹 이미지를 동그라미로 표시 */}
-          <div className="w-24 h-24 bg-green-100 rounded-full mx-auto mb-2 flex items-center justify-center">
-            <Image 
-              src={group.imageUrl} 
-              alt={group.name} 
-              width={60} 
-              height={60} 
-              className="rounded-full"
-              unoptimized
-            />
-          </div>
-          {/* 소그룹 이름 */}
-          <p className="text-sm font-semibold">{group.name}</p>
-          {/* 소그룹 역할 (있을 경우만 표시) */}
-          {group.role && <p className="text-xs text-gray-500">{group.role}</p>}
-        </div>
+        <Grid key={group.id} css={{ minWidth: '160px', textAlign: 'center' }}>
+          <Avatar
+            src={group.imageUrl}
+            css={{ size: '$36', mb: '$4' }}
+            bordered
+            color="primary"
+          />
+          <Text b size="$lg">{group.name}</Text>
+          {group.role && <Text size="$sm" color="$accents7">{group.role}</Text>}
+        </Grid>
       ))}
-    </div>
+    </Grid.Container>
     
-    {/* 오른쪽 화살표 아이콘 */}
-    <div className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10">
-      <GoArrowRight size={24} /> 
-    </div>
-  </div>
+    <Button 
+      light 
+      auto 
+      icon={<GoArrowRight size={32} />} 
+      css={{ position: 'absolute', right: '$4', top: '50%', transform: 'translateY(-50%)', zIndex: 1 }}
+    />
+  </Card>
 );
 
 export default GroupNavigation;

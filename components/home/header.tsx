@@ -1,4 +1,5 @@
 import React from 'react';
+import { Navbar, Text, Button, Container, Spacer } from '@nextui-org/react';
 import { FiMenu, FiSettings } from 'react-icons/fi';
 
 interface HeaderProps {
@@ -7,19 +8,30 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ churchName, denomination }) => (
-  <header className="p-4 flex justify-between items-center">
-    <div className="flex items-center">
-      <FiMenu className="text-2xl text-gray-600 mr-4" />
-      <FiSettings className="text-2xl text-gray-600" />
-    </div>
-    <div className="text-center flex items-baseline">
-      <h1 className="text-xl font-bold mr-2">{churchName}</h1>
-      <span className="text-sm text-gray-500">{denomination}</span>
-    </div>
-    <div>
-      <button className="bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm">정수연</button>
-    </div>
-  </header>
+  <Navbar variant="static">
+    <Container fluid display="flex" alignItems="center" justify="space-between">
+      <Navbar.Content>
+        <Button light auto icon={<FiMenu size={24} />} />
+        <Spacer x={0.5} />
+        <Button light auto icon={<FiSettings size={24} />} />
+      </Navbar.Content>
+
+      <Navbar.Brand css={{ flexDirection: 'column', alignItems: 'center' }}>
+        <Text h1 size="$3xl" weight="bold">
+          {churchName}
+        </Text>
+        <Text size="$sm" color="$accents7">
+          {denomination}
+        </Text>
+      </Navbar.Brand>
+
+      <Navbar.Content>
+        <Button auto light rounded color="primary" css={{ px: '$8' }}>
+          정수연
+        </Button>
+      </Navbar.Content>
+    </Container>
+  </Navbar>
 );
 
 export default Header;
