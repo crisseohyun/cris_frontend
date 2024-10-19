@@ -1,14 +1,17 @@
 'use client';
 
 import React from 'react';
-import { Avatar } from '@nextui-org/react';
-import { GoArrowRight, GoArrowLeft } from 'react-icons/go';
+import { Button, Tooltip, ScrollShadow } from "@nextui-org/react";
+import { IoAddCircleOutline } from "react-icons/io5";
+import { SlArrowLeftCircle, SlArrowRightCircle, SlOptions } from "react-icons/sl";
+import { FaStar } from 'react-icons/fa';
 
 interface GroupProps {
   id: string;
   name: string;
   imageUrl: string;
   role?: string;
+  isStarred?: boolean;
 }
 
 interface SogroupProps {
@@ -18,80 +21,70 @@ interface SogroupProps {
 
 const Sogroup: React.FC<SogroupProps> = ({ groups, className }) => {
   if (!groups || groups.length === 0) return null;
-
-  const groupCount = groups.length;
-  const rightArrowLeft = 78 * groupCount + 102; 
+  const displayGroups = groups.slice(0, 8);
 
   return (
-    <div className={`relative flex flex-col items-center ${className}`}>
-      {/* 소그룹 제목 */}
-      <h2
-        className="absolute"
-        style={{
+    <div className={`relative ${className}`}>
+      <div className="flex items-center mb-4 absolute top-[-40px] left-0 z-10">
+        <h2 className="mr-2" style={{ 
           fontFamily: 'Source Serif Pro, serif',
           fontSize: '24px',
           fontWeight: 400,
           lineHeight: '30.07px',
-          textAlign: 'left',
-          top: '-46px', // 소그룹 제목을 소그룹 동그라미 위로 46px 이동
-          left: '0px',   // 소그룹 전체의  왼쪽 끝에 배치
-        }}
-      >
-        소그룹
-      </h2>
-
-      {/* 왼쪽 화살표 */}
-      <button
-        className="absolute"
-        style={{
-          width: '24px',
-          height: '24px',
-          top: '39px',    // 동그라미 중앙 (78px / 2)
-          left: '-32px',  // 동그라미 왼쪽으로 32px
-        }}
-        aria-label="Previous Group"
-      >
-        <GoArrowLeft size={24} />
-      </button>
-
-      {/* 동그라미들 */}
-      <div className="flex space-x-4">
-        {groups.map((group) => (
-          <div
-            key={group.id}
-            className="flex flex-col items-center"
-          >
-            {group.imageUrl ? (
-              <Avatar
-                src={group.imageUrl}
-                className="w-[78px] h-[78px] mb-2"
-                isBordered
-                color="primary"
-              />
-            ) : (
-              <div className="w-[78px] h-[78px] mb-2 bg-gray-200 rounded-full flex items-center justify-center">
-                <span className="text-gray-500 text-xs">사진 없음</span>
-              </div>
-            )}
-            <p className="text-sm font-bold">{group.name}</p>
-            {group.role && <p className="text-sm text-gray-500">{group.role}</p>}
-          </div>
-        ))}
+          textAlign: 'left'
+        }}>
+          소그룹
+        </h2>
+        <Button isIconOnly size="sm" variant="light">
+          <IoAddCircleOutline size={24} className="text-gray-500" />
+        </Button>
       </div>
+      
+      <div className="relative">
+        <Button isIconOnly size="sm" variant="light" className="absolute left-[-40px] top-[40%] transform -translate-y-1/2 z-10" aria-label="Previous Group">
+          <SlArrowLeftCircle size={24} />
+        </Button>
 
-      {/* 오른쪽 화살표 */}
-      <button
-        className="absolute"
-        style={{
-          width: '45px',
-          height: '45px',
-          top: '0px',                      // 소그룹 타이틀과 같은 높이에 위치
-          left: `${rightArrowLeft}px`,     // 마지막 동그라미 오른쪽으로 102px
-        }}
-        aria-label="Next Group"
-      >
-        <GoArrowRight size={45} />
-      </button>
+        <ScrollShadow className="w-full" size={20}>
+          <div className="flex space-x-4 overflow-x-auto py-4 px-2" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+            {displayGroups.map((group) => (
+              <div key={group.id} className="flex flex-col items-center min-w-[90px] relative">
+                <div className="w-[90px] h-[90px] rounded-full bg-gray-200 mb-2 relative">
+                  {group.imageUrl && (
+                    <img src={group.imageUrl} alt={group.name} className="w-full h-full object-cover rounded-full" />
+                  )}
+                  <Tooltip content={group.isStarred ? "즐겨찾기 제거" : "즐겨찾기 추가"}>
+                    <Button isIconOnly size="sm" variant="light" className="absolute bottom-0 right-0 p-0">
+                      <FaStar 
+                        size={30} 
+                        className={`${group.isStarred ? 'text-yellow-400' : 'text-white'}`}
+                        style={{ 
+                          strokeWidth: group.isStarred ? 0 : 30,
+                          stroke: '#666',
+                          filter: 'drop-shadow(0px 0px 1px rgba(0,0,0,0.3))'
+                        }}
+                      />
+                    </Button>
+                  </Tooltip>
+                </div>
+                <p className="text-sm font-bold text-center">{group.name}</p>
+                {group.role && <p className="text-xs text-gray-500 text-center">{group.role}</p>}
+              </div>
+            ))}
+            
+            <div className="flex flex-col items-center min-w-[90px]">
+              <Button isIconOnly size="lg" variant="flat" className="w-[90px] h-[90px] mb-2 rounded-full">
+                <SlOptions size={24} />
+              </Button>
+              <p className="text-xs text-gray-500">추가</p>
+            </div>
+          </div>
+        </ScrollShadow>
+
+        <Button isIconOnly size="sm" variant="light" className="absolute right-[-40px] top-[40%] transform -translate-y-1/2 z-10" aria-label="Next Group">
+          <SlArrowRightCircle size={24} />
+        </Button>
+      </div>
     </div>
   );
 };

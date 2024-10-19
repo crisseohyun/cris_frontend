@@ -3,6 +3,7 @@
 import React from 'react';
 import { Navbar, Button } from '@nextui-org/react';
 import { FiMenu, FiSettings } from 'react-icons/fi';
+import { FaUserCircle } from 'react-icons/fa';
 
 interface HeaderProps {
   churchName: string;
@@ -10,9 +11,9 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ churchName, denomination }) => (
-  <Navbar className="w-full px-4 py-4">
-    {/* 좌측: 메뉴하고 설정 버튼입니 */}
-    <div className="flex items-center space-x-2">
+  <Navbar className="w-full px-4 py-4 flex items-center">
+    {/* 좌측: 메뉴하고 설정 버튼 */}
+    <div className="flex items-center ml-[-96px]">
       <Button isIconOnly variant="light" className="text-inherit">
         <FiMenu size={24} />
       </Button>
@@ -21,25 +22,28 @@ const Header: React.FC<HeaderProps> = ({ churchName, denomination }) => (
       </Button>
     </div>
 
-    {/* 교회 이름하고 소속, 아직 로고는 못 넣었음 */}
-    <div className="flex items-center">
-      <h1 className="font-pretendard text-[24px] md:text-[48px] font-bold leading-[1.2] text-left whitespace-nowrap">
+    {/* 교회 이름하고 소속 */}
+    <div className="flex-1 flex items-center justify-center">
+      <h1 className="font-pretendard text-[24px] md:text-[48px] font-bold leading-[1.2] text-center whitespace-nowrap">
         {churchName}
       </h1>
-      <span className="font-source-serif-pro text-sm md:text-[24px] font-normal leading-[1.25] text-left ml-2 whitespace-nowrap">
+      <span className="font-source-serif-pro text-sm md:text-[24px] font-normal leading-[1.25] text-center ml-2 whitespace-nowrap">
         {denomination}
       </span>
     </div>
 
-    {/* 회원 정보 버튼인데 아직 아이콘은 못 넣음 */}
-    <div className="flex items-center">
+    {/* 회원 정보 버튼 */}
+    <div className="flex items-center mr-[-120px]">
       <Button
         variant="flat"
-        color="primary"
-        className="px-6 py-2 rounded-full border-t-2 border-r-0 border-b-0 border-l-0"
+        className="rounded-full border-t-2 border-r-0 border-b-0 border-l-0 flex items-center justify-center bg-black text-white"
         style={{ width: '112px', height: '40px' }}
       >
-        정수연
+        <FaUserCircle
+          className="mr-2"
+          style={{ width: '36px', height: '40px' }}
+        />
+        <span>정수연</span>
       </Button>
     </div>
   </Navbar>
