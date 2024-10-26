@@ -22,7 +22,7 @@ const Header: React.FC<HeaderProps> = ({ churchName, denomination }) => (
       </Button>
     </div>
 
-    {/* 교회 이름하고 소속 */}
+    {/* 교회 이름, 소속 */}
     <div className="flex-1 flex items-center justify-center">
       <h1 className="font-pretendard text-[24px] md:text-[48px] font-bold leading-[1.2] text-center whitespace-nowrap">
         {churchName}
